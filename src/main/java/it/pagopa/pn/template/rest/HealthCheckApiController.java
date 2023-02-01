@@ -12,7 +12,8 @@ import reactor.core.publisher.Mono;
 public class HealthCheckApiController implements HealthCheckApi {
 
     @Override
-    public Mono<ResponseEntity<Void>> status(ServerWebExchange exchange) {
-        return Mono.just(ResponseEntity.ok().build());
+    public Mono<ResponseEntity<String>> status(ServerWebExchange exchange) {
+        log.debug("Start status");
+        return Mono.just(ResponseEntity.ok("OK"));
     }
 }

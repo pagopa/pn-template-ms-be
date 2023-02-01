@@ -25,6 +25,11 @@ paths:
       responses:
         '200':
           description: Ok
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: OK
         '500':
           description: Internal Server Error
   /template/api/httpheaders:
