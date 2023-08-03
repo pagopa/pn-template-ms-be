@@ -16,12 +16,12 @@ public class TemplateApplication {
 
 
     @RestController
-    @RequestMapping("/")
+    @RequestMapping("")
     public static class RootController {
 
-        @GetMapping("/")
+        @GetMapping("")
         public String home() {
-            return "";
+            return "Sono Vivo!";
         }
     }
 }

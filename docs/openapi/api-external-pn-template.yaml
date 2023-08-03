@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.0.3
 info:
   title: PN Template BE Microservice
   description: Documentation APIs v1.0
@@ -15,7 +15,7 @@ servers:
   - url: https://api.pn.pagopa.it
     description: Generated server url
 paths:
-  /status:
+  '/status':
     get:
       summary: healthCheck path
       description: health check path per verificare lo stato del micro servizio
@@ -25,14 +25,9 @@ paths:
       responses:
         '200':
           description: Ok
-          content:
-            text/plain:
-              schema:
-                type: string
-                example: OK
         '500':
           description: Internal Server Error
-  /template/api/httpheaders:
+  '/template/api/httpheaders':
     get:
       summary: Build a map of all the Http Header for the request
       operationId: getHttpHeadersMap
@@ -51,12 +46,34 @@ paths:
                       type: string
         '500':
             description: InternalServerError
+            content:
+              application/problem+json:
+                schema:
+                  $ref: 'remote-refs.yaml#/components/schemas/Problem'
+components:
+  schemas:
+    MockResponse:
+      title: Identificativi della richiesta di notifica
+      description: >-
+        Contiene le informazioni per identificare una richiesta di invio notifica
+        che non è ancora stata accettata da Piattaforma notifiche.
+      type: object
+      required:
+        - notificationRequestId
+        - paProtocolNumber
+      properties:
+        notificationRequestId:
+          type: string
+          description: >-
+            identificativo univoco di una richiesta di invio notifica, non è lo IUN
+          maxLength: 36
+          pattern: ^[A-Za-z0-9+/=]{36}$
 
-#  securitySchemes:                                      # ONLY EXTERNAL
-#    bearerAuth:                                         # ONLY EXTERNAL
-#      type: http                                        # ONLY EXTERNAL
-#      scheme: bearer                                    # ONLY EXTERNAL
-#      bearerFormat: JWT                                 # ONLY EXTERNAL
-#security:                                               # ONLY EXTERNAL
-# - bearerAuth: []                                       # ONLY EXTERNAL
-              
+  securitySchemes:        # ONLY EXTERNAL
+    ApiKeyAuth:           # ONLY EXTERNAL
+      type: apiKey        # ONLY EXTERNAL
+      in: header          # ONLY EXTERNAL
+      name: x-api-key     # ONLY EXTERNAL
+
+security:                 # ONLY EXTERNAL
+  - ApiKeyAuth: [] # use the same name as under securitySchemes    # ONLY EXTERNAL
