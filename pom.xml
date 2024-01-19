@@ -23,7 +23,7 @@
 		<dependency>
 			<groupId>it.pagopa.pn</groupId>
 			<artifactId>pn-commons</artifactId>
-			<version>2.1.10</version>
+			<version>2.2.5</version>
 			<exclusions>
 				<exclusion>
 					<groupId>it.pagopa.tech.lollipop-consumer-java-sdk</groupId>
@@ -43,10 +43,15 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+<!--		janino required se si esclude le dipendenze di lollipop-->
+		<dependency>
+			<groupId>org.codehaus.janino</groupId>
+			<artifactId>janino</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>it.pagopa.pn</groupId>
 			<artifactId>pn-model</artifactId>
-			<version>2.1.1</version>
+			<version>2.2.0</version>
 		</dependency>
 
 		<dependency>
